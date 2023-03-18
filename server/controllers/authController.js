@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 dotenv.config();
 
 import { createError }  from '../utils/error.js';
+<<<<<<< HEAD
 export const register = async (req, res, next) => {
     try {
         const salt = bcrypt.genSaltSync(10);
@@ -14,6 +15,27 @@ export const register = async (req, res, next) => {
             email: req.body.email,
             password: hash,
         });
+=======
+
+export const register = async (req, res, next) => {
+    const { username, email, password } = req.body;
+    try {
+        const user = User.findOne({username: username});
+        if(user){
+            return next(createError(404, "Username already exists"));
+        }
+        // const hashedPassword = await bcrypt.hash(password, 12);
+        // const newUser = await User.create({username, email, password: hashedPassword});
+        // OR......
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+        const newUser = new User({
+            username,
+            email,
+            password: hash,
+        });
+        await newUser.save();
+>>>>>>> f6f3fdb04cdf432de15737349acbe4ee49a789f1
         res.status(200).json({
             user: newUser,
             message: 'Successfully registered',

@@ -14,6 +14,7 @@ export const verifyToken = (req, res, next) => {
         req.user = user;  //assigned property 'user' to request
         next();
     })
+<<<<<<< HEAD
 }
 
 export const verifyUser = (req, res, next) => {
@@ -38,4 +39,6 @@ export const verifyAdmin = (req, res, next) => {
             }
         }
     })
+=======
+>>>>>>> f6f3fdb04cdf432de15737349acbe4ee49a789f1
 }
