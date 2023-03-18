@@ -3,12 +3,7 @@ import User from '../models/User.js'
 
 export const getUsers = async (req, res, next) => {
     try {
-<<<<<<< HEAD
-        const Users = await User.find({});
-        console.log(Users);
-=======
         const Users = await User.find();
->>>>>>> f6f3fdb04cdf432de15737349acbe4ee49a789f1
         res.status(200).json(Users);
     } catch (err) {
         next(err);
