@@ -3,8 +3,8 @@ import User from '../models/User.js'
 
 export const getUsers = async (req, res, next) => {
     try {
-        const Users = await User.find();
-        res.status(200).json(Users);
+        const users = await User.find();
+        res.status(200).json(users);
     } catch (err) {
         next(err);
     }
@@ -14,8 +14,8 @@ export const getSingleUser = async (req, res, next) => {
     try {
         if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id');
 
-        const User = await User.find({_id: id});
-        res.status(200).json(User);
+        const user = await User.findById(id);
+        res.status(200).json(user);
     } catch (err) {
         next(err);
     }

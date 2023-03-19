@@ -12,7 +12,7 @@ export const newHotel = async (req, res, next) => {
 }
 export const getHotels = async (req, res, next) => {
     try {
-        const Hotels = await Hotel.find({});
+        const Hotels = await Hotel.find();
         res.status(200).json(Hotels);
     } catch (err) {
         next(err);
@@ -21,7 +21,7 @@ export const getHotels = async (req, res, next) => {
 export const getSingleHotel = async (req, res, next) => {
     const id = req.params.id;
     try {
-        const hotel = await Hotel.find({_id: id});
+        const hotel = await Hotel.findById(id);
         res.status(200).json(hotel);
     } catch (err) {
         next(err);
@@ -32,7 +32,7 @@ export const updateHotel = async (req, res, next) => {
     const updates = req.body;
     const id = req.params.id;
     try {
-        const updatedHotel = await Hotel.findByIdAndUpdate(id, updates, {new: true});
+        const updatedHotel = await Hotel.findByIdAndUpdate(id, {$set: updates}, {new: true});
         res.status(200).json(updatedHotel);
     } catch (err) {
         next(err);
